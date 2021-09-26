@@ -4,13 +4,13 @@ public:
         if (n <= 2) {
             return n;
         }
-        int step1 = 1, step2 = 2, ans;
+        vector<int> dp(n+1,0);
+        dp[1] = 1;
+        dp[2] = 2;
         for (int i = 3; i <= n; i++) {
-            ans = step1 + step2;
-            step1 = step2;
-            step2 = ans;
+            dp[i] = dp[i-1] + dp[i-2];
         }
         
-        return ans;
+        return dp[n];
     }
 };
