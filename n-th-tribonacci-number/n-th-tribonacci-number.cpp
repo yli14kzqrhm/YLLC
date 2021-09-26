@@ -6,16 +6,16 @@ public:
         } else if (n == 2) {
             return 1;
         }
-        
-        int ans, s0 = 0, s1 = 1, s2 = 1;
+
+        vector<int> dp(n+1, 0);
+        dp[0] = 0;
+        dp[1] = 1;
+        dp[2] = 1;
         
         for (int i = 3; i <= n; i++) {
-            ans = s0 + s1 + s2;
-            s0 = s1;
-            s1 = s2;
-            s2 = ans;
+            dp[i] = dp[i-1] + dp[i-2] + dp[i-3];
         }
         
-        return ans;
+        return dp[n];
     }
 };
