@@ -11,27 +11,28 @@
  */
 class Solution {
 public:
+    int ans;
     int sumNumbers(TreeNode* root) {
-        int ans = 0;
-        
-        ans = helper(root, ans);
-        
+        ans = 0;
+        helper(root, 0);
         return ans;
     }
     
-    int helper(TreeNode* root, int ans) {
-        int res = 0;
-        
-        ans = ans * 10 + root->val;
-        
-        if (root->left) {
-            res += helper(root->left, ans);
+    void helper(TreeNode* root, int sum) {
+        if (!root) {
+            return ;
         }
         
-        if (root->right) {
-            res += helper(root->right, ans);
-        }
+        sum = sum * 10 + root->val;
         
-        return max(ans,res);
+        if (!root->left && !root->right) {
+            ans += sum;
+            return ;
+        }
+
+
+        helper(root->left, sum);
+
+        helper(root->right, sum);
     }
 };
